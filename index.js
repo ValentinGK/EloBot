@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const bot = new Discord.Client()
 
 bot.login('NDA1NTI5ODc4MTM4NTg1MDg4.DUlyVw.dIRclJcJUe0ny7njGORq-T1_Y2c')
-bot.on('message', function (message) {
+bot.on('message', function (message), function (httpGet) {
 
     if (message.content === '!elo') {
         message.channel.send(
