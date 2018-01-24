@@ -7,10 +7,9 @@ var LeaguePointsText;
 var winsText;
 var lossesText;
 var winratioText;
-var url = "http://euw.op.gg/summoner/userName=";
+var url = "http://euw.op.gg/summoner/userName="+
 function getInfo(nickname) {
-    url = url+nickname;
-    request(url, function(err, resp, body){
+    request(url+nickname, function(err, resp, body){
         var $ = cheerio.load(body);
         var tierRank = $('.tierRank');
         tierRankText = tierRank.text();
@@ -22,8 +21,8 @@ function getInfo(nickname) {
         lossesText = losses.text();
         var winratio = $('.winratio');
         winratioText = winratio.text();
-    })
-}
+    });
+};
 
 bot.login('NDA1NTI5ODc4MTM4NTg1MDg4.DUlyVw.dIRclJcJUe0ny7njGORq-T1_Y2c');
 bot.on('message', function (message) {
@@ -31,7 +30,7 @@ bot.on('message', function (message) {
     {
         var nickname = message.content.substr(5);
         getInfo(nickname);
-        console.log(url, tierRankText, LeaguePointsText, winsText, lossesText, winratioText);
+        console.log(url,nickname,tierRankText);
         message.channel.send(tierRankText + " - " + LeaguePointsText + "\n" + winsText + " - " + lossesText + "\n" + winratioText);
     }
 });
