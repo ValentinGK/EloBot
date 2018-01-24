@@ -7,7 +7,9 @@ You can add EloBot to your Discord Server on  [this link](https://discordapp.com
 ## How To Use 
 
 It's really simple:
+
 type !elo [nickname] [server] 
+
  Server list: 
  "kr" for Korea 
  "jp" for Japan 
@@ -18,7 +20,8 @@ type !elo [nickname] [server]
  "las" for LAS 
  "lan" for LAN 
  "ru" for Russia 
- "tr" for Turkey 
+ "tr" for Turkey.
+ 
  Leave empty [server] for EUW 
  No white spaces in the nickname ! 
  Example with Faker (Hide on bush): !elo Hideonbush kr
