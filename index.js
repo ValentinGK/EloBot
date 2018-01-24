@@ -2,14 +2,18 @@ const Discord = require('discord.js');
 const cheerio = require('cheerio');
 const bot = new Discord.Client();
 var request = require('request');
+var encodeUrl = require('encodeurl');
 var tierRankText;
 var LeaguePointsText;
 var winsText;
 var lossesText;
 var winratioText;
 var url = ".op.gg/summoner/userName="
+if (server = 'kr'){
+    server = 'www'
+}
 function getInfo(nickname,message,server) {
-    request("http://" + server + url+nickname, function(err, resp, body){
+    request(encodeUrl("http://" + server + url+nickname), function(err, resp, body){
         var $ = cheerio.load(body);
         var tierRank = $('.tierRank');
         tierRankText = tierRank.text();
@@ -41,12 +45,12 @@ bot.on('message', function (message) {
         if (message.content.startsWith('!elo'))
         {
             var args = message.content.substr(5).split(" ");
-            if (args.length<2)
+            if (args.length<2){
                 getInfo(args[0],message,"euw");
         }
         else{
-            getInfo(args[0],message,"jp")
-        }
+            getInfo(args[0],message,args[1])
+        }}
     }catch(e){
         console.log(e.stack)
     }
