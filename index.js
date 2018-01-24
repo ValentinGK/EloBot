@@ -54,4 +54,5 @@ bot.on('message', function (message) {
     }catch(e){
         console.log(e.stack)
     }
+    bot.user.setActivity('!help for help');
 });
