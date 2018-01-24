@@ -24,7 +24,10 @@ function getInfo(nickname,message) {
         if (tierRankText == 'Unranked'){
             message.channel.send('This player is unranked');
         }
-        else {
+        if (tierRankText == false){
+            message.channel.send('This nickname doesn\'t exist');
+        }
+        if(tierRankText != "Unranked" && tierRankText){
             message.channel.send(tierRankText + " - " + LeaguePointsText + "\n" + winsText + " - " + lossesText + "\n" + winratioText);
         }});
 };
