@@ -9,11 +9,11 @@ var winsText;
 var lossesText;
 var winratioText;
 var url = ".op.gg/summoner/userName="
-if (server = 'kr'){
-    server = 'www'
-}
 function getInfo(nickname,message,server) {
-    request(encodeUrl("http://" + server + url+nickname), function(err, resp, body){
+    if (server == 'kr'){
+        server = 'www'
+    }
+    request(encodeUrl("http://" + server + url+nickname.replace(/\s/g,'')),console.log(encodeUrl("http://" + server + url+nickname), function(err, resp, body){
         var $ = cheerio.load(body);
         var tierRank = $('.tierRank');
         tierRankText = tierRank.text();
@@ -33,14 +33,14 @@ function getInfo(nickname,message,server) {
         }
         if(tierRankText != "Unranked" && tierRankText){
             message.channel.send(tierRankText + " - " + LeaguePointsText + "\n" + winsText + " - " + lossesText + "\n" + winratioText);
-        }});
+        }}));
 };
 
 bot.login('NDA1NTI5ODc4MTM4NTg1MDg4.DUlyVw.dIRclJcJUe0ny7njGORq-T1_Y2c');
 bot.on('message', function (message) {
     try{
         if (message.content === '!help'){
-            message.channel.send('LES AIDES A FAIRE APRES')
+            message.channel.send('Maxence Roger')
         }
         if (message.content.startsWith('!elo'))
         {
