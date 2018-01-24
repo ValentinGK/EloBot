@@ -7,9 +7,9 @@ var LeaguePointsText;
 var winsText;
 var lossesText;
 var winratioText;
-var url = "http://euw.op.gg/summoner/userName="
-function getInfo(nickname,message) {
-    request(url+nickname, function(err, resp, body){
+var url = ".op.gg/summoner/userName="
+function getInfo(nickname,message,server) {
+    request("http://" + serveur + url+nickname, function(err, resp, body){
         var $ = cheerio.load(body);
         var tierRank = $('.tierRank');
         tierRankText = tierRank.text();
@@ -36,8 +36,11 @@ bot.login('NDA1NTI5ODc4MTM4NTg1MDg4.DUlyVw.dIRclJcJUe0ny7njGORq-T1_Y2c');
 bot.on('message', function (message) {
     if (message.content.startsWith('!elo'))
     {
-        var nickname = message.content.substr(5);
-        getInfo(nickname,message);
-        console.log(url + nickname,tierRankText);
+        var args = message.content.substr(5).split(" ");
+    if (args.length<2)
+        getInfo(args[0],message,"euw");
+    }
+    else{
+        getInfo(args[0],mesage,args[1])
     }
 });
