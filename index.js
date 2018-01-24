@@ -27,12 +27,11 @@ function getInfo(nickname) {
 
 bot.login('NDA1NTI5ODc4MTM4NTg1MDg4.DUlyVw.dIRclJcJUe0ny7njGORq-T1_Y2c');
 bot.on('message', function (message) {
-    if (message.content === '!elo')
-    var nickname = message.content.substr(5);
+    if (message.content.startsWith('!elo'))
     {
+        var nickname = message.content.substr(5);
+        getInfo(nickname);
+        console.log(url, tierRankText, LeaguePointsText, winsText, lossesText, winratioText);
         message.channel.send(tierRankText + " - " + LeaguePointsText + "\n" + winsText + " - " + lossesText + "\n" + winratioText);
     }
 });
-
-
-
