@@ -9,7 +9,7 @@ var lossesText;
 var winratioText;
 var url = ".op.gg/summoner/userName="
 function getInfo(nickname,message,server) {
-    request("http://" + serveur + url+nickname, function(err, resp, body){
+    request("http://" + server + url+nickname, function(err, resp, body){
         var $ = cheerio.load(body);
         var tierRank = $('.tierRank');
         tierRankText = tierRank.text();
@@ -33,18 +33,21 @@ function getInfo(nickname,message,server) {
 };
 
 bot.login('NDA1NTI5ODc4MTM4NTg1MDg4.DUlyVw.dIRclJcJUe0ny7njGORq-T1_Y2c');
-bot.user.setGame('!help for help').catch(console.error);
 bot.on('message', function (message) {
-    if (message.content === '!help'){
-        message.channel.send('LES AIDES A FAIRE APRES')
-    }
-    if (message.content.startsWith('!elo'))
-    {
-        var args = message.content.substr(5).split(" ");
-    if (args.length<2)
-        getInfo(args[0],message,"euw");
-    }
-    else{
-        getInfo(args[0],mesage,args[1])
+    try{
+        if (message.content === '!help'){
+            message.channel.send('LES AIDES A FAIRE APRES')
+        }
+        if (message.content.startsWith('!elo'))
+        {
+            var args = message.content.substr(5).split(" ");
+            if (args.length<2)
+                getInfo(args[0],message,"euw");
+        }
+        else{
+            getInfo(args[0],message,"jp")
+        }
+    }catch(e){
+        console.log(e.stack)
     }
 });
